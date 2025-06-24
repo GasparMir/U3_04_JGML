@@ -1,17 +1,10 @@
 package com.almacenes.gestion_almacenes.services;
 
-import com.almacenes.gestion_almacenes.models.Almacen;
-import com.almacenes.gestion_almacenes.models.Cliente;
-import com.almacenes.gestion_almacenes.models.EstadoAlmacen;
-import com.almacenes.gestion_almacenes.models.TipoOperacion;
-import com.almacenes.gestion_almacenes.repositories.AlmacenRepository;
-import com.almacenes.gestion_almacenes.repositories.ClienteRepository;
-import org.springframework.stereotype.Service;
+import com.almacenes.gestion_almacenes.models.*;
+import com.almacenes.gestion_almacenes.repositories.*;
+import org.springframework.stereotype.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.BiConsumer;
 
 @Service

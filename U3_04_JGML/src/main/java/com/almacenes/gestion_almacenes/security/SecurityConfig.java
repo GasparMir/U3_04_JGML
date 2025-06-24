@@ -1,15 +1,13 @@
 package com.almacenes.gestion_almacenes.security;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.context.annotation.*;
+import org.springframework.security.config.annotation.web.configuration.*;
+import org.springframework.security.config.annotation.web.builders.*;
+import org.springframework.security.web.*;
+import org.springframework.security.core.userdetails.*;
+import org.springframework.security.provisioning.*;
+import org.springframework.security.crypto.bcrypt.*;
+import org.springframework.security.crypto.password.*;
 
 @Configuration
 @EnableWebSecurity
@@ -19,11 +17,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable()) // Desactiva CSRF para permitir pruebas con Postman
+            .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .anyRequest().authenticated() // Cualquier endpoint requiere autenticación
+                .requestMatchers("/api/**").hasRole("ADMIN")
+                .anyRequest().authenticated()
             )
-            .httpBasic(); // Habilita autenticación básica
+            .httpBasic();
 
         return http.build();
     }
@@ -38,6 +37,12 @@ public class SecurityConfig {
                 .roles("ADMIN")
                 .build()
         );
+        manager.createUser(
+            User.withUsername("user")
+                .password(passwordEncoder().encode("userpass"))
+                .roles("USER")
+                .build()
+        );
         return manager;
     }
 
@@ -46,4 +51,5 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-}
+
+    }

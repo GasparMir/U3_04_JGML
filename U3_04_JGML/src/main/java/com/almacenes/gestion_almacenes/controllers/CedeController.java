@@ -1,10 +1,13 @@
 package com.almacenes.gestion_almacenes.controllers;
 
-import com.almacenes.gestion_almacenes.models.Cede;
-import com.almacenes.gestion_almacenes.services.CedeService;
+import com.almacenes.gestion_almacenes.models.*;
+import com.almacenes.gestion_almacenes.services.*;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/cedes")
@@ -21,7 +24,7 @@ public class CedeController {
     }
 
     @PostMapping
-    public Cede createCede(@RequestBody Cede cede) {
+    public Cede createCede(@RequestBody @Valid Cede cede) {
         return cedeService.saveCede(cede);
     }
 
@@ -31,7 +34,7 @@ public class CedeController {
     }
 
     @PutMapping("/{id}")
-    public Cede updateCede(@PathVariable Long id, @RequestBody Cede cede) {
+    public Cede updateCede(@PathVariable Long id, @RequestBody @Valid Cede cede) {
         cede.setId(id);
         return cedeService.saveCede(cede);
     }

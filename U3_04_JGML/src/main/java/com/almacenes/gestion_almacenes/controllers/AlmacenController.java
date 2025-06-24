@@ -1,14 +1,14 @@
 package com.almacenes.gestion_almacenes.controllers;
 
-import com.almacenes.gestion_almacenes.models.Almacen;
-import com.almacenes.gestion_almacenes.models.TipoOperacion;
-import com.almacenes.gestion_almacenes.services.AlmacenService;
+import com.almacenes.gestion_almacenes.models.*;
+import com.almacenes.gestion_almacenes.services.*;
 
-import org.springframework.http.ResponseEntity;
+import jakarta.validation.*;
+
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/almacenes")
@@ -25,7 +25,7 @@ public class AlmacenController {
     }
 
     @PostMapping
-    public Almacen createAlmacen(@RequestBody Almacen almacen) {
+    public Almacen createAlmacen(@RequestBody @Valid Almacen almacen) {
         return almacenService.saveAlmacen(almacen);
     }
 
@@ -35,7 +35,7 @@ public class AlmacenController {
     }
 
     @PutMapping("/{id}")
-    public Almacen updateAlmacen(@PathVariable Long id, @RequestBody Almacen almacen) {
+    public Almacen updateAlmacen(@PathVariable Long id, @RequestBody @Valid Almacen almacen) {
         almacen.setId(id);
         return almacenService.saveAlmacen(almacen);
     }

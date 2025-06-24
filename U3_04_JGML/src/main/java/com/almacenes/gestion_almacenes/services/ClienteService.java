@@ -1,10 +1,10 @@
 package com.almacenes.gestion_almacenes.services;
 
-import com.almacenes.gestion_almacenes.models.Cliente;
-import com.almacenes.gestion_almacenes.repositories.ClienteRepository;
-import org.springframework.stereotype.Service;
+import com.almacenes.gestion_almacenes.models.*;
+import com.almacenes.gestion_almacenes.repositories.*;
+import java.util.*;
 
-import java.util.List;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ClienteService {
@@ -18,8 +18,8 @@ public class ClienteService {
         return repo.findAll();
     }
 
-    public Cliente getClienteById(Long id) {
-        return repo.findById(id).orElse(null);
+    public Optional<Cliente> getClienteById(Long id) {
+        return repo.findById(id);
     }
 
     public Cliente saveCliente(Cliente cliente) {

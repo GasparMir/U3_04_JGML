@@ -1,13 +1,11 @@
 package com.almacenes.gestion_almacenes.services;
 
-import com.almacenes.gestion_almacenes.models.Cede;
-import com.almacenes.gestion_almacenes.repositories.CedeRepository;
-import org.springframework.stereotype.Service;
+import com.almacenes.gestion_almacenes.models.*;
+import com.almacenes.gestion_almacenes.repositories.*;
+import org.springframework.stereotype.*;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.text.*;
+import java.util.*;
 
 @Service
 public class CedeService {

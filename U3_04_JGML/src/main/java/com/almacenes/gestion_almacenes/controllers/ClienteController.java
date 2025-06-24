@@ -1,10 +1,11 @@
 package com.almacenes.gestion_almacenes.controllers;
 
-import com.almacenes.gestion_almacenes.models.Cliente;
-import com.almacenes.gestion_almacenes.services.ClienteService;
+import com.almacenes.gestion_almacenes.models.*;
+import com.almacenes.gestion_almacenes.services.*;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/clientes")
@@ -21,17 +22,17 @@ public class ClienteController {
     }
 
     @PostMapping
-    public Cliente createCliente(@RequestBody Cliente cliente) {
+    public Cliente createCliente(@RequestBody @Valid Cliente cliente) {
         return clienteService.saveCliente(cliente);
     }
 
     @GetMapping("/{id}")
     public Cliente getCliente(@PathVariable Long id) {
-        return clienteService.getClienteById(id);
+        return clienteService.getClienteById(id).orElse(null);
     }
 
     @PutMapping("/{id}")
-    public Cliente updateCliente(@PathVariable Long id, @RequestBody Cliente cliente) {
+    public Cliente updateCliente(@PathVariable Long id, @RequestBody @Valid Cliente cliente) {
         cliente.setId(id);
         return clienteService.saveCliente(cliente);
     }
